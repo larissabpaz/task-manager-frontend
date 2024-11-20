@@ -91,7 +91,7 @@ export default function ToDoListComponent() {
             marginBottom: '5%',
             maxWidth: '90%',
         }}>
-            <Paper elevation={3} sx={{ padding: 4, maxWidth: '90%', minWidth: 300, height: '100%'  }}>
+            <Paper elevation={3} sx={{ padding: 4, maxWidth: '90%', minWidth: 300, height: '100%', flexDirection: 'column', colunajustifyContent: 'center', alignItems: 'center',   }}>
                 <Typography variant="h4" color="primary" gutterBottom>Gerenciador de Tarefas</Typography>
                 <Box display="flex" gap="20px" mb={2}>
                 <Button variant="contained" color="primary" onClick={() => setIsModalOpen(true)}>
@@ -120,10 +120,9 @@ export default function ToDoListComponent() {
                     size="small"
                 >
                     <MenuItem value="">Todas as Tarefas</MenuItem>
-                    <MenuItem value="Baixa">Baixa</MenuItem>
-                    <MenuItem value="Média">Média</MenuItem>
-                    <MenuItem value="Alta">Alta</MenuItem>
-                    <MenuItem value="Manutenção">Manutenção</MenuItem>
+                    <MenuItem value="Baixa">Prioridade Baixa</MenuItem>
+                    <MenuItem value="Média">Prioridade Média</MenuItem>
+                    <MenuItem value="Alta">Prioridade Alta</MenuItem>
                     {Array.from(new Set(tasks.flatMap(task => task.categories))).map(category => (
                         <MenuItem key={category} value={category}>
                             {category}
@@ -156,7 +155,7 @@ export default function ToDoListComponent() {
                 {hasTasks ? ( 
                     <Box display="flex" justifyContent="space-between" width="100%" height="50vh" mt={4} >
                         {columns.map(column => (
-                            <Paper key={column} sx={{ flex: 1, margin: '0 4px', padding: 2, overflow: 'auto', minWidth:'24vh' }}>
+                            <Paper key={column} sx={{ flex: 1, margin: '0 4px', padding: 2, overflow: 'auto', minWidth:'24vh', backgroundColor: '#F7DAFC' }}>
                                 <Typography >{column}</Typography>
                                 <Box>
                                     {tasks.filter(task => task.status === column).map(task => (

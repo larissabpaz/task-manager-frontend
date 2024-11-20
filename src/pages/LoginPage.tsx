@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
-import { Container, Card, Box, Typography, FormControl, TextField, FormControlLabel, Checkbox, Button, Divider } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { Container, Link, Card, Box, Typography, FormControl, TextField, FormControlLabel, Checkbox, Button, Divider } from "@mui/material";
 import InventorySharpIcon from '@mui/icons-material/InventorySharp';
 import ForgotPassword from "../components/ForgotPassword";
 import { GoogleIcon } from "../components/CustomIcons";
@@ -11,7 +11,7 @@ export default function LoginPage() {
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState(false);
     const [emailErrorMessage, setEmailErrorMessage] = useState('');
-    //const [usernameErrorMessage, setusernameErrorMessage] = useState('');
+    const [usernameErrorMessage, setusernameErrorMessage] = useState('');
     const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
@@ -71,7 +71,7 @@ export default function LoginPage() {
     
     const handleLogin = async () => {
         try {
-            const response = await axios.post("http://localhost:5000/api/auth/login", {
+            const response = await axios.post("http://localhost:7218/api/auth/login", {
                 username,
                 password,
             });
@@ -159,7 +159,7 @@ export default function LoginPage() {
                     </FormControl>
                     <FormControl>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                        {/* <Link
+                        <Link
                         component="button"
                         type="button"
                         onClick={handleClickOpen}
@@ -167,7 +167,7 @@ export default function LoginPage() {
                         sx={{ alignSelf: 'baseline' }}
                         >
                         Esqueceu sua senha?
-                        </Link> */}
+                        </Link>
                     </Box>
                     <TextField
                         label='Senha'
@@ -202,13 +202,13 @@ export default function LoginPage() {
                     <Typography sx={{ textAlign: 'center' }}>
                     Você ainda não possui uma conta?{' '}
                     <span>
-                        {/* <Link
+                        <Link
                         href="/cadastrar"
                         variant="body2"
                         sx={{ alignSelf: 'center' }}
                         >
                         Cadastre-se
-                        </Link> */}
+                        </Link>
                     </span>
                     </Typography>
                 </Box>
