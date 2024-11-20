@@ -3,7 +3,7 @@ import { Typography, TextField, Button, Card, FormControl, Link, Divider } from 
 import { Container, Box } from "@mui/system";
 import InventorySharpIcon from '@mui/icons-material/InventorySharp';
 import { useNavigate } from 'react-router-dom';
-import { GoogleIcon } from './CustomIcons';
+import { GoogleIcon } from '../components/CustomIcons';
 
 export default function UserRegister() {
     const [name, setName] = useState('');

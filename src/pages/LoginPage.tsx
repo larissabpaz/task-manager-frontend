@@ -3,8 +3,8 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { Container, Card, Box, Typography, FormControl, TextField, FormControlLabel, Checkbox, Button, Divider } from "@mui/material";
 import InventorySharpIcon from '@mui/icons-material/InventorySharp';
-import ForgotPassword from "./ForgotPassword";
-import { GoogleIcon } from "./CustomIcons";
+import ForgotPassword from "../components/ForgotPassword";
+import { GoogleIcon } from "../components/CustomIcons";
 
 export default function LoginPage() {
     const [username, setUsername] = useState("");

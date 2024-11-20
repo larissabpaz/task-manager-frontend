@@ -6,9 +6,9 @@ import ContentPasteOffOutlinedIcon from '@mui/icons-material/ContentPasteOffOutl
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
-import TaskModal from './Modal';
+import TaskModal from '../components/Modal';
 import TaskForm from './TaskForm';
-import EmptyState from './EmptyState';
+import EmptyState from '../components/EmptyState';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 
 interface Task {
