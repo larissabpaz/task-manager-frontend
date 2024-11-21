@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Container, Link, Card, Box, Typography, FormControl, TextField, FormControlLabel, Checkbox, Button, Divider } from "@mui/material";
 import InventorySharpIcon from '@mui/icons-material/InventorySharp';
 import ForgotPassword from "../components/ForgotPassword";
 import { GoogleIcon } from "../components/CustomIcons";
+import { login } from "../Services/api";
 
 export default function LoginPage() {
     const [username, setUsername] = useState("");
@@ -25,22 +25,36 @@ export default function LoginPage() {
         setOpen(false);
     };
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        if (emailError || passwordError) {
-            event.preventDefault();
-          return;
-        }
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
     
         if (validateInputs()) {
-          const data = new FormData(event.currentTarget);
-          console.log({
-            email: data.get('gmail'),
-            password: data.get('pasWord'),
-            });
+            const loginSuccess = await handleLogin();
     
-          navigate('/todo-list');
+            if (loginSuccess) {
+                navigate('/todo-list');
+            } else {
+                navigate('/');
+            }
         }
-      };
+    };
+    
+    const handleLogin = async () => {
+        try {
+            const response = await login(username,password);
+    
+            if (response.data.token) {
+                localStorage.setItem("token", response.data.token);
+                return true; 
+            } else {
+                return false; 
+            }
+        } catch (error) {
+            console.error("Login failed", error);
+            alert("Falha no login. Tente novamente.");
+            return false; 
+        }
+    };
 
     const validateInputs = () => {
         const email = document.getElementById('email') as HTMLInputElement;
@@ -68,35 +82,8 @@ export default function LoginPage() {
 
         return isValid;
     };
-    
-    const handleLogin = async () => {
-        try {
-            const response = await axios.post("http://localhost:7218/api/auth/login", {
-                username,
-                password,
-            });
-            localStorage.setItem("token", response.data.token);
-        } catch (error) {
-            console.error("Login failed");
-        }
-    };
 
     return (
-        // <div>
-        //     <input
-        //         type="text"
-        //         placeholder="Username"
-        //         value={username}
-        //         onChange={(e) => setUsername(e.target.value)}
-        //     />
-        //     <input
-        //         type="password"
-        //         placeholder="Password"
-        //         value={password}
-        //         onChange={(e) => setPassword(e.target.value)}
-        //     />
-        //     <button onClick={handleLogin}>Login</button>
-        // </div>
         <Container 
             sx={{
                 display: 'flex',

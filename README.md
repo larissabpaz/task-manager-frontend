@@ -53,7 +53,7 @@ src/
 ├── App.tsx           # Componente raiz da aplicação
 └── main.tsx          # Arquivo de entrada da aplicação
 Rotas
-/login: Página de login
+/: Página de login
 /register: Página de cadastro
 /tasks: Página de gerenciamento de tarefas (rota protegida, disponível apenas para usuários autenticados)
 

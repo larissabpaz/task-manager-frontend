@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, TextField, Select, MenuItem, Button, Chip, Tooltip } from '@mui/material';
 import AddCommentOutlinedIcon from '@mui/icons-material/AddCommentOutlined';
+import { createTask, updateTask } from '../Services/api';
 
 interface TaskFormProps {
     title: string;
@@ -15,6 +16,14 @@ interface TaskFormProps {
     setCategories: (value: string[]) => void;
     onSubmit: () => void;
     isEditMode: boolean;
+    existingTask?: {
+        id: string;
+        title: string;
+        description: string;
+        priority: string;
+        status: 'Tarefas' | 'Em Progresso' | 'Feito';
+        categories: string[];
+    };
 }
 
 export default function TaskForm ({
@@ -27,12 +36,23 @@ export default function TaskForm ({
     setPriority,
     setStatus,
     onSubmit,
-    isEditMode
+    isEditMode,
+    existingTask
 } :TaskFormProps) {
     const [categories, setCategories] = useState<string[]>([]);
     const [categoryInput, setCategoryInput] = useState('');
-
     const predefinedCategories = ['Manutenção', 'Desenvolvimento', 'Reunião'];
+
+    useEffect(() => {
+        if (isEditMode && existingTask) {
+          setTitle(existingTask.title);
+          setDescription(existingTask.description);
+          setPriority(existingTask.priority);
+          setStatus(existingTask.status);
+          setCategories(existingTask.categories);
+        }
+      }, [isEditMode, existingTask, setTitle, setDescription, setPriority, setStatus, setCategories]);
+
 
     const handleAddCategory = () => {
         if (categoryInput && !categories.includes(categoryInput)) {
@@ -44,6 +64,28 @@ export default function TaskForm ({
     const handleDeleteCategory = (categoryToDelete: string) => {
         setCategories(categories.filter(category => category !== categoryToDelete));
     };
+
+    const handleSubmit = async () => {
+        const task = {
+          title,
+          description,
+          priority,
+          status,
+          categories
+        };
+    
+        try {
+            if (isEditMode && existingTask) {
+                await updateTask(existingTask.id, task); 
+              } else {
+                await createTask(task); 
+              }
+    
+          onSubmit(); 
+        } catch (error) {
+          console.error('Erro ao enviar tarefa', error);
+        }
+      };
 
     return (
         <Box display="flex" flexDirection="column" gap="20px">
@@ -123,7 +165,7 @@ export default function TaskForm ({
                 ))}
             </Box>
             
-            <Button variant="contained" color="primary" onClick={onSubmit}>
+            <Button variant="contained" color="primary" onClick={handleSubmit}>
                 {isEditMode ? 'Atualizar Tarefa' : 'Adicionar Tarefa'}
             </Button>
         </Box>

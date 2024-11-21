@@ -4,6 +4,7 @@ import { Container, Box } from "@mui/system";
 import InventorySharpIcon from '@mui/icons-material/InventorySharp';
 import { useNavigate } from 'react-router-dom';
 import { GoogleIcon } from '../components/CustomIcons';
+import { register } from '../Services/api';
 
 export default function UserRegister() {
     const [name, setName] = useState('');
@@ -28,17 +29,27 @@ export default function UserRegister() {
       }
     };
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-      if (emailError || passwordError || nameError) {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      return;
+  
+      if (emailError || passwordError || nameError) {
+        return;
       }
+  
       const data = new FormData(event.currentTarget);
-      console.log({
-      name: data.get('name'),
-      email: data.get('email'),
-      password: data.get('password'),
-      });
+      const name = data.get('name') as string;
+      const email = data.get('email') as string;
+      const password = data.get('password') as string;
+  
+      console.log('Enviando dados para a API:', { name, email, password });
+  
+      try {
+        const response = await register(email, password);  
+        console.log('Usuário registrado:', response);  
+        navigate('/todo-list');  
+      } catch (error) {
+        console.error('Erro ao registrar usuário:', error); 
+      }
     };
 
     const validateInputs = () => {
