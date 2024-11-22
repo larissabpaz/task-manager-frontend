@@ -20,7 +20,7 @@ export default function App() {
             </>
           ) : (
             <>
-              {/* <Route path="/todo-list" element={<ToDoListComponent />} />  */}
+              <Route path="/todo-list" element={<ToDoListComponent />} /> 
               <Route path="/cadastrar" element={<UserRegister />} />
               <Route path="/" element={<LoginPage />} />
             </>

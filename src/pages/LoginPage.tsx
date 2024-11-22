@@ -89,7 +89,7 @@ export default function LoginPage() {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'flex-start',
-                maxHeight: '100%',
+                maxHeight: '90%',
                 overflowY: 'auto',
                 marginTop: '5%',
                 marginBottom: '5%',
@@ -104,13 +104,11 @@ export default function LoginPage() {
                         justifyContent: 'center',
                         alignItems: 'center',
                         height: '10vh',
-                        marginBottom:'8px'
+                        marginBottom:'8px',
                     }}
                     >
-                    <InventorySharpIcon
-                        sx={{ fontSize: 50, color: '#510c76' }}
-                    />
-                    <Typography color="primary" sx={{ width: '100%', fontSize: '24px' }}>
+                    <InventorySharpIcon sx={{ fontSize: 50, color: '#510c76' }} />
+                    <Typography color="primary" sx={{ width: '75vh', fontSize: '24px' }}>
                     Acesse Seu Gerenciador de Tarefas
                     </Typography>
                 </Box>

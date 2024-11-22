@@ -21,7 +21,7 @@ root.render(
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
-            minHeight: '80vh',
+            minHeight: '100vh',
           },
         }}
       />
