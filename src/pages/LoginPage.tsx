@@ -7,7 +7,6 @@ import { GoogleIcon } from "../components/CustomIcons";
 import { login } from "../Services/api";
 
 export default function LoginPage() {
-    //const [, setUserIsLogged] = useState<boolean>(false);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState(false);
@@ -16,6 +15,7 @@ export default function LoginPage() {
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
     const [passwordError, setPasswordError] = useState(false);
+    const [, setUserIsLogged] = useState(false);
     
     const handleClickOpen = () => {
         setOpen(true);
@@ -62,7 +62,7 @@ export default function LoginPage() {
     
                 if (response) {
                     localStorage.setItem("jwt_token", response);
-                    //setUserIsLogged(true);
+                    setUserIsLogged(true);
                     navigate('/todo-list');  
                 } else {
                     alert("Falha no login: token não encontrado.");
