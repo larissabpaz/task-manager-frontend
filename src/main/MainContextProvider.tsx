@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 export type User = {
     //userId: string;
@@ -17,6 +17,7 @@ type MainContextType = {
     userIsLogged?: boolean;
     user?: User;
     setUser: (user: User | undefined) => void;
+    setUserIsLogged: (isLogged: boolean) => void;
   };
 
 const defaultValue: MainContextType = {
@@ -29,6 +30,7 @@ const defaultValue: MainContextType = {
     userIsLogged: false,
     user: undefined,
     setUser: () => {},
+    setUserIsLogged: () => {}
   };
 
 export const MainContext = React.createContext(defaultValue);

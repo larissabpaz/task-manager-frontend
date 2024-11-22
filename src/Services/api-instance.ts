@@ -24,12 +24,3 @@ api.interceptors.request.use(
     }
 );
 
-api.interceptors.response.use(
-    (response) => response,
-    (error) => {
-        if (error.response && error.response.status === 401) {
-            window.location.href = "/";
-        }
-        return Promise.reject(error);
-    }
-);

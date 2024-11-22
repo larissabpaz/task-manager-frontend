@@ -1,18 +1,19 @@
 import { api } from "./api-instance";
 
-export const login = async (email: string, password: string) => {
+export const login = async (email: string, senha: string) => {
     try {
-        const response = await api.post("/api/Auth/login", { email, password });
+        const response = await api.post("/api/Auth/login", { email, senha });
+        console.log("Retorno da API:", response.data);
         return response.data;
     } catch (error) {
-        console.error("Login failed", error);
+        console.error("Erro na requisição de login:", error);
         throw error;
     }
 };
 
-export const register = async (email: string, password: string) => {
+export const register = async (email: string, senha: string) => {
     try {
-        const response = await api.post("/api/Auth/register", { email, password });
+        const response = await api.post("/api/Auth/register", { email, senha });
         return response.data;
     } catch (error) {
         console.error("Registration failed", error);
